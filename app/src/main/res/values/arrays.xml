@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lista_ufs">
+        <item>Acre</item>
+        <item>Amazonas</item>
+        <item>Bahia</item>
+        <item>Minas Gerais</item>
+        <item>Pará</item>
+        <item>Rio de Janeiro</item>
+        <item>São Paulo</item>
+    </string-array>
+</resources>

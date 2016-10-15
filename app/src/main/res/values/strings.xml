@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Laboratorio 07</string>
+    <string name="label_operacao">Operação</string>
+    <string name="dica_cidade">Cidade</string>
+    <string name="label_tipoOperacao">Selecione o Tipo de Operação</string>
+    <string name="label_estilo">Estilo da Moto</string>
+    <string name="label_tipoMoto">Selecione o estilo da Moto</string>
+    <string name="lavel_valorMinimo">Valor Mínimo</string>
+    <string name="label_valorMaximo">Valor Máximo</string>
+
+</resources>
