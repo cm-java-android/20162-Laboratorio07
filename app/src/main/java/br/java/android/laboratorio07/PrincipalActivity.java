@@ -2,12 +2,13 @@ package br.java.android.laboratorio07;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.support.v4.widget.TextViewCompat;
+import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -26,6 +27,11 @@ public class PrincipalActivity extends AppCompatActivity
     private TextView minimoTextView;
     private SeekBar maximoSeekBar;
     private SeekBar minimoSeekBar;
+
+    private ProgressBar barraProgresso;
+    private int progresso = 0;
+    private Handler tratador;
+    private int tamanhoArquivo = 0;
 
     // Precisamos saber qual foi a operação que foi selecionada
     private int operacaoSelecionada;
@@ -90,7 +96,11 @@ public class PrincipalActivity extends AppCompatActivity
                 Log.d("Laboratorio 07",  "Valor maximo recebido " + maximoSeekBar.getProgress());
             }
         });
+
+        // Tratamento para o Progress Bar
+        usaBarraProgresso();
     }
+
 
     /**
      * Qualquer toque na tela, vamos capturar quando o
@@ -145,4 +155,65 @@ public class PrincipalActivity extends AppCompatActivity
 
         return montador.create();
     }
+
+    private void usaBarraProgresso() {
+
+        barraProgresso = (ProgressBar) findViewById(R.id.progressBar);
+        tratador = new Handler();
+
+        new Thread(new Runnable() {
+            public void run() {
+                while (progresso < 100){
+                    progresso = simulador();
+                    Log.d("Laboratorio 07",  "Progresso " + progresso);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        Log.e("Laboratorio 07",  "Erro no Tread Sleep", e);
+                    }
+
+                    // Atualiza a Barra de Progresso
+                    tratador.post(new Runnable() {
+                        public void run() {
+                            barraProgresso.setProgress(progresso);
+                        }
+                    });
+                }
+            }
+        }).start();
+
+    }
+
+    private int simulador() {
+
+        Log.d("Laboratorio 07",  "Progresso " + progresso);
+
+        while (tamanhoArquivo <= 1000000){
+            tamanhoArquivo ++;
+
+            switch (tamanhoArquivo){
+                case 100000:
+                    return 10;
+                case 200000:
+                    return 20;
+                case 300000:
+                    return 30;
+                case 400000:
+                    return 40;
+                case 500000:
+                    return 50;
+                case 600000:
+                    return 60;
+                case 700000:
+                    return 70;
+                case 800000:
+                    return 80;
+                case 900000:
+                    return 90;
+            }
+        }
+        return 100;
+    }
+
 }
